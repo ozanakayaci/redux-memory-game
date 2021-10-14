@@ -40,7 +40,7 @@ const shuffle = (array) => {
   return array;
 };
 const shuffledCards = shuffle(initialCards);
-
+console.log(shuffledCards, "shuffled");
 function Game() {
   //reduxd dispatch and addOne
   const dispatch = useDispatch();

@@ -65,7 +65,7 @@ function Card() {
       })
     );
   };
-
+  console.log(Cards, "cards");
   return (
     <Box>
       <Box p="2px" className="playground">
