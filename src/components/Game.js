@@ -39,8 +39,10 @@ const shuffle = (array) => {
   }
   return array;
 };
-const shuffledCards = shuffle(initialCards);
+const doubledCards = initialCards.concat(initialCards);
+const shuffledCards = shuffle(doubledCards);
 console.log(shuffledCards, "shuffled");
+
 function Game() {
   //reduxd dispatch and addOne
   const dispatch = useDispatch();
