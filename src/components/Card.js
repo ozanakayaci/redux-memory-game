@@ -1,13 +1,38 @@
 import { useState, useEffect } from "react";
 
+import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
-import { cardSelectors, updateCard, updateAll } from "../redux/memorySlice";
+import {
+  cardSelectors,
+  updateCard,
+  updateAll,
+  deleteAll,
+  addCard,
+} from "../redux/memorySlice";
 
 import { Image, Box, Button, Text } from "@chakra-ui/react";
 
 const linkImg =
   "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/";
 
+//initialCard names
+const initialCards = [
+  "angular2",
+  "vue",
+  "react",
+  "grunt",
+  "phantomjs",
+  "ember",
+  "babel",
+  "ionic",
+  "gulp",
+  "meteor",
+  "yeoman",
+  "yarn",
+  "nodejs",
+  "bower",
+  "browserify",
+];
 //shuffle fucntion
 const shuffle = (array) => {
   let currentIndex = array.length,
@@ -22,6 +47,8 @@ const shuffle = (array) => {
   }
   return array;
 };
+const doubledCards = initialCards.concat(initialCards);
+const shuffledCards = shuffle(doubledCards);
 
 function Card() {
   //redux selector,dispatch
@@ -32,7 +59,8 @@ function Card() {
   const [openedCards, setOpenedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [score, setScore] = useState(0);
-  //if match,else
+
+  //if card match,else [openedCards]
   useEffect(() => {
     if (openedCards.length === 2) {
       setTimeout(() => {
@@ -82,9 +110,43 @@ function Card() {
       })
     );
   };
+  //restart button handler
+  const shuffleHandler = () => {
+    dispatch(deleteAll());
+    shuffle(Cards);
+    setScore(0);
+    setMatchedCards([]);
+    setOpenedCards([]);
+    shuffledCards.map((item) => {
+      dispatch(
+        addCard({
+          id: nanoid(2),
+          name: item,
+          close: true,
+          complete: false,
+        })
+      );
+    });
+  };
+
+  //play button
 
   return (
     <Box>
+      <Box
+        mb="50px"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Text>Score:{score}</Text>
+        {matchedCards.length >= 15 && (
+          <Button onClick={() => shuffleHandler()}>Restart</Button>
+        )}
+        {matchedCards.length == 0 && (
+          <Button onClick={() => shuffleHandler()}>Start</Button>
+        )}
+      </Box>
       <Box p="2px" className="playground">
         {Cards.map((item, i) => {
           return (
@@ -108,17 +170,6 @@ function Card() {
             </Box>
           );
         })}
-      </Box>
-      <Box
-        mt="50px"
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Text>Score:{score}</Text>
-        {matchedCards.length >= 15 && (
-          <Button onClick={() => shuffle(Cards)}>Shuffle</Button>
-        )}
       </Box>
     </Box>
   );
