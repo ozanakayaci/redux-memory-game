@@ -117,16 +117,19 @@ function Card() {
     setScore(0);
     setMatchedCards([]);
     setOpenedCards([]);
-    shuffledCards.map((item) => {
-      dispatch(
-        addCard({
-          id: nanoid(2),
-          name: item,
-          close: true,
-          complete: false,
-        })
-      );
-    });
+    shuffle(shuffledCards);
+    setTimeout(() => {
+      shuffledCards.map((item) => {
+        dispatch(
+          addCard({
+            id: nanoid(2),
+            name: item,
+            close: true,
+            complete: false,
+          })
+        );
+      });
+    }, 500);
   };
 
   //play button
@@ -140,9 +143,9 @@ function Card() {
         justifyContent="space-between"
       >
         <Text>Score:{score}</Text>
-        {matchedCards.length >= 15 && (
-          <Button onClick={() => shuffleHandler()}>Restart</Button>
-        )}
+
+        <Button onClick={() => shuffleHandler()}>Restart</Button>
+
         {matchedCards.length == 0 && (
           <Button onClick={() => shuffleHandler()}>Start</Button>
         )}
