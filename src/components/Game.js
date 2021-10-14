@@ -26,7 +26,6 @@ const initialCards = [
 ];
 //shuffle fucntion
 const shuffle = (array) => {
-  console.log("shuffle");
   let currentIndex = array.length,
     temporaryValue,
     randomIndex;
@@ -41,7 +40,6 @@ const shuffle = (array) => {
 };
 const doubledCards = initialCards.concat(initialCards);
 const shuffledCards = shuffle(doubledCards);
-console.log(shuffledCards, "shuffled");
 
 function Game() {
   //reduxd dispatch and addOne
@@ -53,7 +51,6 @@ function Game() {
         name: item,
         close: true,
         complete: false,
-        fail: false,
       })
     );
   });
