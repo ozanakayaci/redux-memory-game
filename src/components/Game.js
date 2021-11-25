@@ -10,7 +10,10 @@ import {
   addCard,
 } from "../redux/memorySlice";
 
-import { Image, Box, Button, Text } from "@chakra-ui/react";
+import { Image, Box } from "@chakra-ui/react";
+
+import { Pixton } from "pixton";
+import "pixton/dist/index.css";
 
 //initial values
 const linkImg =
@@ -140,12 +143,14 @@ function Card() {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Text>Score:{score}</Text>
+        <Pixton>Score: {score}</Pixton>
 
-        <Button onClick={() => shuffleHandler()}>Restart</Button>
+        <Pixton onClick={() => shuffleHandler()}>Restart</Pixton>
 
         {matchedCards.length == 0 && (
-          <Button onClick={() => shuffleHandler()}>Start</Button>
+          <Pixton type="primary" onClick={() => shuffleHandler()}>
+            Start
+          </Pixton>
         )}
       </Box>
       <Box p="2px" className="playground">
