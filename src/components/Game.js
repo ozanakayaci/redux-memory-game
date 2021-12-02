@@ -147,7 +147,7 @@ function Card() {
 
         <Pixton onClick={() => shuffleHandler()}>Restart</Pixton>
 
-        {matchedCards.length === 0 && (
+        {matchedCards.length == 0 && (
           <Pixton type="primary" onClick={() => shuffleHandler()}>
             Start
           </Pixton>
@@ -158,13 +158,7 @@ function Card() {
           return (
             <Box
               key={i}
-              onClick={() => {
-                if (item.close === false || item.complete === true) {
-                  return false;
-                } else {
-                  updateHandle(item);
-                }
-              }}
+              onClick={() => updateHandle(item)}
               className={
                 item.close === false || item.complete === true
                   ? "card opened"
