@@ -61,6 +61,7 @@ function Card() {
   const [openedCards, setOpenedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   //if card match,else [openedCards]
   useEffect(() => {
@@ -115,6 +116,7 @@ function Card() {
 
   //restart button handler
   const shuffleHandler = () => {
+    setLoading(true);
     dispatch(deleteAll());
     shuffle(Cards);
     setScore(0);
@@ -132,7 +134,8 @@ function Card() {
           })
         );
       });
-    }, 500);
+      setLoading(false);
+    }, 200);
   };
 
   return (
@@ -145,10 +148,23 @@ function Card() {
       >
         <Pixton>Score: {score}</Pixton>
 
-        <Pixton onClick={() => shuffleHandler()}>Restart</Pixton>
+        <Pixton
+          onClick={() => {
+            if (loading) return false;
+            else shuffleHandler();
+          }}
+        >
+          Restart
+        </Pixton>
 
         {matchedCards.length === 0 && (
-          <Pixton type="primary" onClick={() => shuffleHandler()}>
+          <Pixton
+            type="primary"
+            onClick={() => {
+              if (loading) return false;
+              else shuffleHandler();
+            }}
+          >
             Start
           </Pixton>
         )}
