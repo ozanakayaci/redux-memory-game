@@ -141,23 +141,16 @@ function Card() {
   return (
     <Box id="app">
       <Box
-        mb="50px"
+        mb="40px"
+        mr="20px"
+        ml="20px"
         display="flex"
         alignItems="center"
         justifyContent="space-between"
       >
         <Pixton>Score: {score}</Pixton>
 
-        <Pixton
-          onClick={() => {
-            if (loading) return false;
-            else shuffleHandler();
-          }}
-        >
-          Restart
-        </Pixton>
-
-        {matchedCards.length === 0 && (
+        {matchedCards.length === 0 ? (
           <Pixton
             type="primary"
             onClick={() => {
@@ -166,6 +159,15 @@ function Card() {
             }}
           >
             Start
+          </Pixton>
+        ) : (
+          <Pixton
+            onClick={() => {
+              if (loading) return false;
+              else shuffleHandler();
+            }}
+          >
+            Restart
           </Pixton>
         )}
       </Box>
