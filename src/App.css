@@ -27,9 +27,9 @@
     border-radius: 10px;
   }
   #app .playground .card {
-    width: 15%;
+    width: 16%;
     user-select: none;
-    height: 82px;
+    height: 96px;
     padding: 10px;
     box-sizing: border-box;
     text-align: center;
@@ -42,9 +42,22 @@
 }
 @media (max-width: 480px) {
   #app {
-    padding: 35px;
+    padding: 10px;
     margin: 20px auto;
     border-radius: 8px;
+  }
+  #app .playground .card {
+    width: 18%;
+    user-select: none;
+    height: 82px;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
   }
 }
 

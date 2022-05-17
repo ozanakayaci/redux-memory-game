@@ -142,8 +142,8 @@ function Card() {
     <Box id="app">
       <Box
         mb="40px"
-        mr="20px"
-        ml="20px"
+        mr={[0, 51]}
+        ml={[0, "40px"]}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
